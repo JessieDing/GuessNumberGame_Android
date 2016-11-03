@@ -13,23 +13,163 @@
     tools:context="com.jessie.guessnumber.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <Button
-        android:text="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:layout_marginEnd="29dp"
+    <!-- 为什么要有这个大框？orientation为何设置为vertical？与下面分割的区域有何联系？ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp" />
+        android:orientation="vertical"
+        tools:context="com.jessie.guessnumber.MainActivity">
 
-    <Button
-        android:text="2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:layout_marginTop="17dp"
-        android:layout_below="@+id/button"
-        android:layout_alignStart="@+id/button" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/title_area"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="猜 数 字"
+                android:textColor="#2F4F4F"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/information_area"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="请依序选择4个不同数字，点击按钮得到“xAxB”的提示，A前面的数字代表位置和数字都对的个数，B前面的数字代表数字对但是位置不对的个数。你一共有六次机会哦！" />
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <TableRow android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btn_7"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:text="7" />
+
+                <Button
+                    android:id="@+id/btn_8"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:text="8" />
+
+                <Button
+                    android:id="@+id/btn_9"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:text="9" />
+            </TableRow>
+
+            <TableRow android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btn_4"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:text="4" />
+
+                <Button
+                    android:id="@+id/btn_5"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:text="5" />
+
+                <Button
+                    android:id="@+id/btn_6"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:text="6" />
+            </TableRow>
+
+            <TableRow android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btn_1"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:text="1" />
+
+                <Button
+                    android:id="@+id/btn_2"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:text="2" />
+
+                <Button
+                    android:id="@+id/btn_3"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:text="3" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_0"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/showNumber_area"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center" />
+            </TableRow>
+
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_showResult"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="checkResult"
+                android:text="点击查看提示"
+                android:textColor="#2F4F4F"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/showResult_area"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

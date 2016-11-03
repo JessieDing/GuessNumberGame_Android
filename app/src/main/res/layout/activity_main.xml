@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     tools:context="com.jessie.guessnumber.MainActivity">
 
-    <include layout="@layout/content_main"
-        android:id="@+id/include" />
-
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_main" /><!-- include用处？ -->
 </android.support.design.widget.CoordinatorLayout>
