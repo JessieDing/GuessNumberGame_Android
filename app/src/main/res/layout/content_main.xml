@@ -17,10 +17,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:orientation="vertical"
-        tools:context="com.jessie.guessnumber.MainActivity">
+        tools:context="com.jessie.guessnumber.MainActivity"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,20 +30,230 @@
 
         </LinearLayout>
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2">
-
-
-        </ListView>
-
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="vertical">
+            android:layout_weight="4"
+            android:stretchColumns="*">     <!-- 均匀布局每列-->
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:gravity="center"
+                    android:text="第1行第1列" />
+
+                <TextView
+                    android:gravity="center"
+                    android:text="第1行第2列" />
+
+            </TableRow>
+
+            <TableRow android:layout_weight="1">
+
+                <TextView
+                    android:gravity="center"
+                    android:text="第2行第1列" />
+
+                <TextView
+                    android:gravity="center"
+                    android:text="第2行第2列" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+
+                <TextView
+                    android:gravity="center"
+                    android:text="第2行第1列" />
+
+                <TextView
+                    android:gravity="center"
+                    android:text="第2行第2列" />
+
+            </TableRow>
+
 
         </TableLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/first_num"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="18dip"
+                android:layout_marginRight="3dip"
+                android:layout_marginTop="10dip"
+                android:background="@drawable/input_number_view_shape" />
+
+            <TextView
+                android:id="@+id/second_num"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="3dip"
+                android:layout_marginRight="3dip"
+                android:layout_marginTop="10dip"
+                android:background="@drawable/input_number_view_shape" />
+
+            <TextView
+                android:id="@+id/third_num"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="3dip"
+                android:layout_marginRight="3dip"
+                android:layout_marginTop="10dip"
+                android:background="@drawable/input_number_view_shape" />
+
+            <TextView
+                android:id="@+id/fourth_num"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="20dip"
+                android:layout_marginTop="10dip"
+                android:background="@drawable/input_number_view_shape" />
+
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="4"
+            android:orientation="horizontal"
+            android:rowCount="4">
+
+            <Button
+                android:id="@+id/btn_1"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/rectangle_button"
+                android:text="1" />
+            　　
+
+            <Button
+                android:id="@+id/btn_2"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:background="@drawable/rectangle_button"
+                android:text="2" />
+            　　　
+
+            <Button
+                android:id="@+id/btn_3"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:background="@drawable/rectangle_button"
+                android:text="3" />
+
+            <Button
+                android:id="@+id/btn_4"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/rectangle_button"
+                android:text="4" />
+            　　
+
+            <Button
+                android:id="@+id/btn_5"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/rectangle_button"
+                android:text="5" />
+            　　　
+
+            <Button
+                android:id="@+id/btn_6"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:background="@drawable/rectangle_button"
+                android:text="6" />
+
+            <Button
+                android:id="@+id/btn_7"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:background="@drawable/rectangle_button"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/btn_8"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/rectangle_button"
+                android:text="8" />
+            　　　
+
+            <Button
+                android:id="@+id/btn_9"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="20dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/rectangle_button"
+                android:text="9" />
+
+            <Button
+                android:id="@+id/btn_0"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:background="@drawable/rectangle_button"
+                android:text="0" />
+
+            <Button
+                android:id="@+id/btn_del"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:background="@drawable/rectangle_button"
+                android:text="C" />
+
+            <Button
+                android:id="@+id/btn_OK"
+
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/rectangle_button"
+                android:text="OK" />
+
+        </GridLayout>
     </LinearLayout>
 </RelativeLayout>

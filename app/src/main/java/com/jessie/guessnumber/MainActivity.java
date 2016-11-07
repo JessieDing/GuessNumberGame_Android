@@ -131,6 +131,20 @@ public class MainActivity extends AppCompatActivity {
                 showPlayerInputNumbers(number9);
             }
         });
+        Button butonC = (Button) findViewById(R.id.btn_del);
+        buton9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                delete();
+            }
+        });
+        Button butonEnter = (Button) findViewById(R.id.btn_OK);
+        buton9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                run();
+            }
+        });
 
         final RandomNumberGenerator numberGenerator = new RandomNumberGenerator();
         final Answer answer = new Answer();
