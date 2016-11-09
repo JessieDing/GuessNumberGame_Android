@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 //    private GoogleApiClient client;
     private int count; //默认值为0
     private List<String> numbers;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -37,12 +38,88 @@ public class MainActivity extends AppCompatActivity {
         if (numbers.size() < 4) {
             numbers.add(String.valueOf(number));
         }
-        TextView showNumberArea = (TextView) findViewById(R.id.showNumber_area);  //通过Activity的findViewById()方法获取表达式区域
-        String strNewContent = "";
-        for (String x : numbers) {
-            strNewContent += x;
+        TextView showNumberArea1 = (TextView) findViewById(R.id.show_first_num);  //通过Activity的findViewById()方法获取表达式区域
+        TextView showNumberArea2 = (TextView) findViewById(R.id.show_second_num);
+        TextView showNumberArea3 = (TextView) findViewById(R.id.show_third_num);
+        TextView showNumberArea4 = (TextView) findViewById(R.id.show_fourth_num);
+        if (numbers.size() > 0) {
+            showNumberArea1.setText(numbers.get(0));
         }
-        showNumberArea.setText(strNewContent);  //把新的表达式内容，通过TextView的setText()方法，显示到表达式区域上
+        if (numbers.size() > 1) {
+            showNumberArea2.setText(numbers.get(1));
+        }
+        if (numbers.size() > 2) {
+            showNumberArea3.setText(numbers.get(2));
+        }
+        if (numbers.size() > 3) {
+            showNumberArea4.setText(numbers.get(3));
+        }
+    }
+
+    private void delete() {
+        TextView showNumberArea1 = (TextView) findViewById(R.id.show_first_num);
+        TextView showNumberArea2 = (TextView) findViewById(R.id.show_second_num);
+        TextView showNumberArea3 = (TextView) findViewById(R.id.show_third_num);
+        TextView showNumberArea4 = (TextView) findViewById(R.id.show_fourth_num);
+
+        if (numbers.get(3) != null) {
+            showNumberArea4.setText("");
+        }
+        if (numbers.get(2) != null) {
+            showNumberArea3.setText("");
+        }
+        if (numbers.get(1) != null) {
+            showNumberArea2.setText("");
+        }
+        if (numbers.get(0) != null) {
+            showNumberArea1.setText("");
+        }
+    }
+
+    private void showResult() {
+        final RandomNumberGenerator numberGenerator = new RandomNumberGenerator();
+        final Answer answer = new Answer();
+        answer.setNumbers(numberGenerator.generate());
+        final Answer playerAnswer = new Answer();
+        playerAnswer.setNumbers(numbers);
+        switch (count) {
+            case 1:
+                TextView result_Area1 = (TextView) findViewById(R.id.showResult_1);
+                String result1 = answer.compareTo(playerAnswer);
+                result_Area1.setText(result1);
+                numbers.clear();
+                break;
+            case 2:
+                TextView result_Area2 = (TextView) findViewById(R.id.showResult_2);
+                String result2 = answer.compareTo(playerAnswer);
+                result_Area2.setText(result2);
+                numbers.clear();
+                break;
+            case 3:
+                TextView result_Area3 = (TextView) findViewById(R.id.showResult_3);
+                String result3 = answer.compareTo(playerAnswer);
+                result_Area3.setText(result3);
+                numbers.clear();
+                break;
+            case 4:
+                TextView result_Area4 = (TextView) findViewById(R.id.showResult_4);
+                String result4 = answer.compareTo(playerAnswer);
+                result_Area4.setText(result4);
+                numbers.clear();
+                break;
+            case 5:
+                TextView result_Area5 = (TextView) findViewById(R.id.showResult_5);
+                String result5 = answer.compareTo(playerAnswer);
+                result_Area5.setText(result5);
+                numbers.clear();
+                break;
+            case 6:
+                TextView result_Area6 = (TextView) findViewById(R.id.showResult_6);
+                String result6 = answer.compareTo(playerAnswer);
+                result_Area6.setText(result6);
+                numbers.clear();
+                break;
+        }
     }
 
     @Override
@@ -131,62 +208,66 @@ public class MainActivity extends AppCompatActivity {
                 showPlayerInputNumbers(number9);
             }
         });
-        Button butonC = (Button) findViewById(R.id.btn_del);
-        buton9.setOnClickListener(new View.OnClickListener() {
+
+        Button buton_DEL = (Button) findViewById(R.id.btn_del);
+        buton_DEL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 delete();
             }
         });
-        Button butonEnter = (Button) findViewById(R.id.btn_OK);
-        buton9.setOnClickListener(new View.OnClickListener() {
+
+
+        Button buton_OK = (Button) findViewById(R.id.btn_OK);
+        buton_OK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                run();
+                count++;
+                showResult();
+                if (count == 6) {
+                    //GameOver
+                }
             }
         });
 
-        final RandomNumberGenerator numberGenerator = new RandomNumberGenerator();
-        final Answer answer = new Answer();
-        answer.setNumbers(numberGenerator.generate());
-        final Answer playerAnswer = new Answer();
-        playerAnswer.setNumbers(numbers);
-        final GameValidator gameValidator = new GameValidator();
+//        final GameValidator gameValidator = new GameValidator();
+//
+//        final Button showResultButton = (Button) findViewById(R.id.button_showResult);
+//        showResultButton.setOnClickListener(new View.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(View view) {
+//
+//                                                    TextView showResultArea = (TextView) findViewById(R.id.showResult_area);
+//                                                    TextView showNumberArea = (TextView) findViewById(R.id.showNumber_area);
+//                                                    String resultMessage = "";
+//
+//                                                    if (!gameValidator.isLengthValid(playerAnswer)) {
+//                                                        showResultArea.setText("请输入四个数字!");
+//                                                        numbers.clear();
+//                                                    } else if (gameValidator.isRepeated(playerAnswer)) {
+//                                                        showResultArea.setText("请勿输入重复数字!");
+//                                                        numbers.clear();
+//                                                    } else if (gameValidator.isCorrect(answer, playerAnswer)) {
+//                                                        showResultArea.setText("恭喜你答对了！" + TextUtils.join(",", answer.getNumbers()));
+//                                                        showResultButton.setClickable(false);
+//
+//                                                    } else {
+//                                                        count++;
+//                                                        resultMessage = answer.compareTo(playerAnswer);
+//                                                        showResultArea.setText(resultMessage + "，你还有" + (6 - count) + "次机会!");
+//                                                        numbers.clear();
+//                                                    }
+//                                                    if (count > 5) {
+//                                                        showResultArea.setText("很遗憾，六次机会已用完！正确答案：" + TextUtils.join(",", answer.getNumbers()));
+//                                                        numbers.clear();
+//                                                        answer.setNumbers(numberGenerator.generate());
+//                                                        count = 0;
+//                                                    }
+//                                                }
+//                                            }
+//        );
 
-        final Button showResultButton = (Button) findViewById(R.id.button_showResult);
-        showResultButton.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View view) {
 
-                                                    TextView showResultArea = (TextView) findViewById(R.id.showResult_area);
-                                                    TextView showNumberArea = (TextView) findViewById(R.id.showNumber_area);
-                                                    String resultMessage = "";
-
-                                                    if (!gameValidator.isLengthValid(playerAnswer)) {
-                                                        showResultArea.setText("请输入四个数字!");
-                                                        numbers.clear();
-                                                    } else if (gameValidator.isRepeated(playerAnswer)) {
-                                                        showResultArea.setText("请勿输入重复数字!");
-                                                        numbers.clear();
-                                                    } else if (gameValidator.isCorrect(answer, playerAnswer)) {
-                                                        showResultArea.setText("恭喜你答对了！" + TextUtils.join(",", answer.getNumbers()));
-                                                        showResultButton.setClickable(false);
-
-                                                    } else {
-                                                        count++;
-                                                        resultMessage = answer.compareTo(playerAnswer);
-                                                        showResultArea.setText(resultMessage + "，你还有" + (6 - count) + "次机会!");
-                                                        numbers.clear();
-                                                    }
-                                                    if (count > 5) {
-                                                        showResultArea.setText("很遗憾，六次机会已用完！正确答案：" + TextUtils.join(",", answer.getNumbers()));
-                                                        numbers.clear();
-                                                        answer.setNumbers(numberGenerator.generate());
-                                                        count = 0;
-                                                    }
-                                                }
-                                            }
-        );
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
