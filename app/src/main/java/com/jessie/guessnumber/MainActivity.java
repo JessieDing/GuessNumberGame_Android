@@ -18,6 +18,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.jessie.guessnumber.R.id.show_first_num;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         if (numbers.size() < 4) {
             numbers.add(String.valueOf(number));
         }
-        TextView showNumberArea1 = (TextView) findViewById(R.id.show_first_num);  //通过Activity的findViewById()方法获取表达式区域
+        TextView showNumberArea1 = (TextView) findViewById(show_first_num);  //通过Activity的findViewById()方法获取表达式区域
         TextView showNumberArea2 = (TextView) findViewById(R.id.show_second_num);
         TextView showNumberArea3 = (TextView) findViewById(R.id.show_third_num);
         TextView showNumberArea4 = (TextView) findViewById(R.id.show_fourth_num);
@@ -62,16 +64,16 @@ public class MainActivity extends AppCompatActivity {
         TextView showNumberArea3 = (TextView) findViewById(R.id.show_third_num);
         TextView showNumberArea4 = (TextView) findViewById(R.id.show_fourth_num);
 
-        if (numbers.get(3) != null) {
+        if (numbers.size() > 3) {
             showNumberArea4.setText("");
         }
-        if (numbers.get(2) != null) {
+        if (numbers.size() > 2) {
             showNumberArea3.setText("");
         }
-        if (numbers.get(1) != null) {
+        if (numbers.size() > 1) {
             showNumberArea2.setText("");
         }
-        if (numbers.get(0) != null) {
+        if (numbers.size() > 0) {
             showNumberArea1.setText("");
         }
     }
@@ -86,37 +88,37 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 TextView result_Area1 = (TextView) findViewById(R.id.showResult_1);
                 String result1 = answer.compareTo(playerAnswer);
-                result_Area1.setText(result1);
+                result_Area1.setText("(1)" + numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3) + "——>" + result1);
                 numbers.clear();
                 break;
             case 2:
                 TextView result_Area2 = (TextView) findViewById(R.id.showResult_2);
                 String result2 = answer.compareTo(playerAnswer);
-                result_Area2.setText(result2);
+                result_Area2.setText("(2)" + numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3) + "——>" + result2);
                 numbers.clear();
                 break;
             case 3:
                 TextView result_Area3 = (TextView) findViewById(R.id.showResult_3);
                 String result3 = answer.compareTo(playerAnswer);
-                result_Area3.setText(result3);
+                result_Area3.setText("(3)" + numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3) + "——>" + result3);
                 numbers.clear();
                 break;
             case 4:
                 TextView result_Area4 = (TextView) findViewById(R.id.showResult_4);
                 String result4 = answer.compareTo(playerAnswer);
-                result_Area4.setText(result4);
+                result_Area4.setText("(4)" + numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3) + "——>" + result4);
                 numbers.clear();
                 break;
             case 5:
                 TextView result_Area5 = (TextView) findViewById(R.id.showResult_5);
                 String result5 = answer.compareTo(playerAnswer);
-                result_Area5.setText(result5);
+                result_Area5.setText("(5)" + numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3) + "——>" + result5);
                 numbers.clear();
                 break;
             case 6:
                 TextView result_Area6 = (TextView) findViewById(R.id.showResult_6);
                 String result6 = answer.compareTo(playerAnswer);
-                result_Area6.setText(result6);
+                result_Area6.setText("(6)" + numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3) + "——>" + result6);
                 numbers.clear();
                 break;
         }
@@ -224,6 +226,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 count++;
                 showResult();
+                TextView showNumberArea1 = (TextView) findViewById(R.id.show_first_num);
+                TextView showNumberArea2 = (TextView) findViewById(R.id.show_second_num);
+                TextView showNumberArea3 = (TextView) findViewById(R.id.show_third_num);
+                TextView showNumberArea4 = (TextView) findViewById(R.id.show_fourth_num);
+                showNumberArea1.setText("");
+                showNumberArea2.setText("");
+                showNumberArea3.setText("");
+                showNumberArea4.setText("");
+
                 if (count == 6) {
                     //GameOver
                 }
