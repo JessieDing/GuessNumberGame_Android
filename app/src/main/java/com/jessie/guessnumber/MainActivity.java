@@ -1,5 +1,7 @@
 package com.jessie.guessnumber;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +31,10 @@ public class MainActivity extends AppCompatActivity {
 //    private GoogleApiClient client;
     private int count; //默认值为0
     private List<String> numbers;
-
+    private TextView showNumberArea1;
+    private TextView showNumberArea2;
+    private TextView showNumberArea3;
+    private TextView showNumberArea4;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -40,10 +45,7 @@ public class MainActivity extends AppCompatActivity {
         if (numbers.size() < 4) {
             numbers.add(String.valueOf(number));
         }
-        TextView showNumberArea1 = (TextView) findViewById(show_first_num);  //通过Activity的findViewById()方法获取表达式区域
-        TextView showNumberArea2 = (TextView) findViewById(R.id.show_second_num);
-        TextView showNumberArea3 = (TextView) findViewById(R.id.show_third_num);
-        TextView showNumberArea4 = (TextView) findViewById(R.id.show_fourth_num);
+
         if (numbers.size() > 0) {
             showNumberArea1.setText(numbers.get(0));
         }
@@ -59,31 +61,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void delete() {
-        TextView showNumberArea1 = (TextView) findViewById(R.id.show_first_num);
-        TextView showNumberArea2 = (TextView) findViewById(R.id.show_second_num);
-        TextView showNumberArea3 = (TextView) findViewById(R.id.show_third_num);
-        TextView showNumberArea4 = (TextView) findViewById(R.id.show_fourth_num);
 
         if (numbers.size() > 3) {
             showNumberArea4.setText("");
-        }
-        if (numbers.size() > 2) {
+        } else if (numbers.size() > 2) {
             showNumberArea3.setText("");
-        }
-        if (numbers.size() > 1) {
+        } else if (numbers.size() > 1) {
             showNumberArea2.setText("");
-        }
-        if (numbers.size() > 0) {
+        } else if (numbers.size() > 0) {
             showNumberArea1.setText("");
         }
+        numbers.remove(numbers.size() - 1);
     }
 
-    private void showResult() {
-        final RandomNumberGenerator numberGenerator = new RandomNumberGenerator();
-        final Answer answer = new Answer();
-        answer.setNumbers(numberGenerator.generate());
-        final Answer playerAnswer = new Answer();
-        playerAnswer.setNumbers(numbers);
+    private void showResult(Answer answer, Answer playerAnswer) {
         String numberArr = numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3);
 
         switch (count) {
@@ -130,6 +121,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {  //程序运行时首先进onCreate方法
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        showNumberArea1 = (TextView) findViewById(show_first_num);
+        showNumberArea2 = (TextView) findViewById(R.id.show_second_num);
+        showNumberArea3 = (TextView) findViewById(R.id.show_third_num);
+        showNumberArea4 = (TextView) findViewById(R.id.show_fourth_num);
+
         numbers = new ArrayList<>();
 
         Button buton0 = (Button) findViewById(R.id.btn_0);
@@ -221,24 +217,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final RandomNumberGenerator numberGenerator = new RandomNumberGenerator();
+        final Answer answer = new Answer();
+        answer.setNumbers(numberGenerator.generate());
+        final Answer playerAnswer = new Answer();
+        playerAnswer.setNumbers(numbers);
 
         Button buton_OK = (Button) findViewById(R.id.btn_OK);
         buton_OK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 count++;
-                showResult();
-                TextView showNumberArea1 = (TextView) findViewById(R.id.show_first_num);
-                TextView showNumberArea2 = (TextView) findViewById(R.id.show_second_num);
-                TextView showNumberArea3 = (TextView) findViewById(R.id.show_third_num);
-                TextView showNumberArea4 = (TextView) findViewById(R.id.show_fourth_num);
+                showResult(answer, playerAnswer);
                 showNumberArea1.setText("");
                 showNumberArea2.setText("");
                 showNumberArea3.setText("");
                 showNumberArea4.setText("");
 
                 if (count == 6) {
-                    //GameOver
+                    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    };
+                    new AlertDialog.Builder(MainActivity.this).setTitle("游戏结束").setMessage("正确答案")
+                            .setPositiveButton("重玩", listener)
+                            .show();
                 }
             }
         });
