@@ -84,41 +84,43 @@ public class MainActivity extends AppCompatActivity {
         answer.setNumbers(numberGenerator.generate());
         final Answer playerAnswer = new Answer();
         playerAnswer.setNumbers(numbers);
+        String numberArr = numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3);
+
         switch (count) {
             case 1:
                 TextView result_Area1 = (TextView) findViewById(R.id.showResult_1);
                 String result1 = answer.compareTo(playerAnswer);
-                result_Area1.setText("(1)" + numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3) + "——>" + result1);
+                result_Area1.setText("(1)" + numberArr + "——>" + result1);
                 numbers.clear();
                 break;
             case 2:
                 TextView result_Area2 = (TextView) findViewById(R.id.showResult_2);
                 String result2 = answer.compareTo(playerAnswer);
-                result_Area2.setText("(2)" + numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3) + "——>" + result2);
+                result_Area2.setText("(2)" + numberArr + "——>" + result2);
                 numbers.clear();
                 break;
             case 3:
                 TextView result_Area3 = (TextView) findViewById(R.id.showResult_3);
                 String result3 = answer.compareTo(playerAnswer);
-                result_Area3.setText("(3)" + numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3) + "——>" + result3);
+                result_Area3.setText("(3)" + numberArr + "——>" + result3);
                 numbers.clear();
                 break;
             case 4:
                 TextView result_Area4 = (TextView) findViewById(R.id.showResult_4);
                 String result4 = answer.compareTo(playerAnswer);
-                result_Area4.setText("(4)" + numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3) + "——>" + result4);
+                result_Area4.setText("(4)" + numberArr + "——>" + result4);
                 numbers.clear();
                 break;
             case 5:
                 TextView result_Area5 = (TextView) findViewById(R.id.showResult_5);
                 String result5 = answer.compareTo(playerAnswer);
-                result_Area5.setText("(5)" + numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3) + "——>" + result5);
+                result_Area5.setText("(5)" + numberArr + "——>" + result5);
                 numbers.clear();
                 break;
             case 6:
                 TextView result_Area6 = (TextView) findViewById(R.id.showResult_6);
                 String result6 = answer.compareTo(playerAnswer);
-                result_Area6.setText("(6)" + numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3) + "——>" + result6);
+                result_Area6.setText("(6)" + numberArr + "——>" + result6);
                 numbers.clear();
                 break;
         }
