@@ -4,12 +4,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView result_Area4;
     private TextView result_Area5;
     private TextView result_Area6;
+
+    private Chronometer chronometer;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -146,6 +150,10 @@ public class MainActivity extends AppCompatActivity {
 
         numbers = new ArrayList<>();
 
+        chronometer = (Chronometer) findViewById(R.id.btn_chronometer);
+        chronometer.setFormat("%s");
+        chronometer.start();
+
         Button buton0 = (Button) findViewById(R.id.btn_0);
         buton0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final GameValidator validator = new GameValidator();
         final RandomNumberGenerator numberGenerator = new RandomNumberGenerator();
         final Answer answer = new Answer();
         answer.setNumbers(numberGenerator.generate());
@@ -259,6 +268,18 @@ public class MainActivity extends AppCompatActivity {
                             .setMessage("请输入4个数字！")
                             .setPositiveButton("确定", listener)
                             .show();
+                } else if (validator.isRepeated(playerAnswer)) {
+                    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    };
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("提示")
+                            .setMessage("数字请勿重复！")
+                            .setPositiveButton("确定", listener)
+                            .show();
                 } else if (answer.getNumbers().equals(playerAnswer.getNumbers())) {
                     DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
                         @Override
@@ -272,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
                             .setPositiveButton("确定", listener)
                             .show();
                     buton_OK.setClickable(false);
-                    showResult(answer, playerAnswer);
+                    chronometer.stop();
                 } else {
                     count++;
                     showResult(answer, playerAnswer);
@@ -294,6 +315,7 @@ public class MainActivity extends AppCompatActivity {
                             .setPositiveButton("确定", listener)
                             .show();
                     buton_OK.setClickable(false);
+                    chronometer.stop();
                 }
             }
         });
@@ -303,6 +325,8 @@ public class MainActivity extends AppCompatActivity {
         buton_Refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                chronometer.setBase(SystemClock.elapsedRealtime());//???
+                chronometer.start();
                 clearShowResultArea();
                 numbers.clear();
                 count = 0;
@@ -319,10 +343,6 @@ public class MainActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
-
-// ATTENTION: This was auto-generated to implement the App Indexing API.
-// See https://g.co/AppIndexing/AndroidStudio for more information.
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
