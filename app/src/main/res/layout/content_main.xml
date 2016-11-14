@@ -28,6 +28,15 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <Button
+                android:id="@+id/btn_refresh"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/refresh"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="16dp"/>
+
         </LinearLayout>
 
         <TableLayout

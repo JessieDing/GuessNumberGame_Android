@@ -6,9 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -35,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
     private TextView showNumberArea2;
     private TextView showNumberArea3;
     private TextView showNumberArea4;
+
+    private TextView result_Area1;
+    private TextView result_Area2;
+    private TextView result_Area3;
+    private TextView result_Area4;
+    private TextView result_Area5;
+    private TextView result_Area6;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -79,42 +87,45 @@ public class MainActivity extends AppCompatActivity {
 
         switch (count) {
             case 1:
-                TextView result_Area1 = (TextView) findViewById(R.id.showResult_1);
                 String result1 = answer.compareTo(playerAnswer);
                 result_Area1.setText("(1)" + numberArr + "——>" + result1);
                 numbers.clear();
                 break;
             case 2:
-                TextView result_Area2 = (TextView) findViewById(R.id.showResult_2);
                 String result2 = answer.compareTo(playerAnswer);
                 result_Area2.setText("(2)" + numberArr + "——>" + result2);
                 numbers.clear();
                 break;
             case 3:
-                TextView result_Area3 = (TextView) findViewById(R.id.showResult_3);
                 String result3 = answer.compareTo(playerAnswer);
                 result_Area3.setText("(3)" + numberArr + "——>" + result3);
                 numbers.clear();
                 break;
             case 4:
-                TextView result_Area4 = (TextView) findViewById(R.id.showResult_4);
                 String result4 = answer.compareTo(playerAnswer);
                 result_Area4.setText("(4)" + numberArr + "——>" + result4);
                 numbers.clear();
                 break;
             case 5:
-                TextView result_Area5 = (TextView) findViewById(R.id.showResult_5);
                 String result5 = answer.compareTo(playerAnswer);
                 result_Area5.setText("(5)" + numberArr + "——>" + result5);
                 numbers.clear();
                 break;
             case 6:
-                TextView result_Area6 = (TextView) findViewById(R.id.showResult_6);
                 String result6 = answer.compareTo(playerAnswer);
                 result_Area6.setText("(6)" + numberArr + "——>" + result6);
                 numbers.clear();
                 break;
         }
+    }
+
+    private void clearShowResultArea() {
+        result_Area1.setText("");
+        result_Area2.setText("");
+        result_Area3.setText("");
+        result_Area4.setText("");
+        result_Area5.setText("");
+        result_Area6.setText("");
     }
 
     @Override
@@ -125,6 +136,13 @@ public class MainActivity extends AppCompatActivity {
         showNumberArea2 = (TextView) findViewById(R.id.show_second_num);
         showNumberArea3 = (TextView) findViewById(R.id.show_third_num);
         showNumberArea4 = (TextView) findViewById(R.id.show_fourth_num);
+
+        result_Area1 = (TextView) findViewById(R.id.showResult_1);
+        result_Area2 = (TextView) findViewById(R.id.showResult_2);
+        result_Area3 = (TextView) findViewById(R.id.showResult_3);
+        result_Area4 = (TextView) findViewById(R.id.showResult_4);
+        result_Area5 = (TextView) findViewById(R.id.showResult_5);
+        result_Area6 = (TextView) findViewById(R.id.showResult_6);
 
         numbers = new ArrayList<>();
 
@@ -223,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
         final Answer playerAnswer = new Answer();
         playerAnswer.setNumbers(numbers);
 
-        Button buton_OK = (Button) findViewById(R.id.btn_OK);
+        final Button buton_OK = (Button) findViewById(R.id.btn_OK);
         buton_OK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -238,53 +256,29 @@ public class MainActivity extends AppCompatActivity {
                     DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
+                            dialog.dismiss();
                         }
                     };
-                    new AlertDialog.Builder(MainActivity.this).setTitle("游戏结束").setMessage("正确答案")
-                            .setPositiveButton("重玩", listener)
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("很遗憾，六次机会已用完！")
+                            .setMessage("正确答案是" + TextUtils.join(",", answer.getNumbers()))
+                            .setPositiveButton("确定", listener)
                             .show();
+                    buton_OK.setClickable(false);
                 }
             }
         });
 
-//        final GameValidator gameValidator = new GameValidator();
-//
-//        final Button showResultButton = (Button) findViewById(R.id.button_showResult);
-//        showResultButton.setOnClickListener(new View.OnClickListener() {
-//                                                @Override
-//                                                public void onClick(View view) {
-//
-//                                                    TextView showResultArea = (TextView) findViewById(R.id.showResult_area);
-//                                                    TextView showNumberArea = (TextView) findViewById(R.id.showNumber_area);
-//                                                    String resultMessage = "";
-//
-//                                                    if (!gameValidator.isLengthValid(playerAnswer)) {
-//                                                        showResultArea.setText("请输入四个数字!");
-//                                                        numbers.clear();
-//                                                    } else if (gameValidator.isRepeated(playerAnswer)) {
-//                                                        showResultArea.setText("请勿输入重复数字!");
-//                                                        numbers.clear();
-//                                                    } else if (gameValidator.isCorrect(answer, playerAnswer)) {
-//                                                        showResultArea.setText("恭喜你答对了！" + TextUtils.join(",", answer.getNumbers()));
-//                                                        showResultButton.setClickable(false);
-//
-//                                                    } else {
-//                                                        count++;
-//                                                        resultMessage = answer.compareTo(playerAnswer);
-//                                                        showResultArea.setText(resultMessage + "，你还有" + (6 - count) + "次机会!");
-//                                                        numbers.clear();
-//                                                    }
-//                                                    if (count > 5) {
-//                                                        showResultArea.setText("很遗憾，六次机会已用完！正确答案：" + TextUtils.join(",", answer.getNumbers()));
-//                                                        numbers.clear();
-//                                                        answer.setNumbers(numberGenerator.generate());
-//                                                        count = 0;
-//                                                    }
-//                                                }
-//                                            }
-//        );
-
+        Button buton_Refresh = (Button) findViewById(R.id.btn_refresh);
+        buton_Refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clearShowResultArea();
+                answer.setNumbers(numberGenerator.generate());
+                count = 0;
+                buton_OK.setClickable(true);
+            }
+        });
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
