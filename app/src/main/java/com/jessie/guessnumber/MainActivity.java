@@ -241,17 +241,46 @@ public class MainActivity extends AppCompatActivity {
         final Answer playerAnswer = new Answer();
         playerAnswer.setNumbers(numbers);
 
+
         final Button buton_OK = (Button) findViewById(R.id.btn_OK);
         buton_OK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                count++;
-                showResult(answer, playerAnswer);
-                showNumberArea1.setText("");
-                showNumberArea2.setText("");
-                showNumberArea3.setText("");
-                showNumberArea4.setText("");
 
+                if (numbers.size() < 4) {
+                    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    };
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("提示")
+                            .setMessage("请输入4个数字！")
+                            .setPositiveButton("确定", listener)
+                            .show();
+                } else if (answer.getNumbers().equals(playerAnswer.getNumbers())) {
+                    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    };
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("恭喜你答对了！")
+                            .setMessage("正确答案是" + TextUtils.join(",", answer.getNumbers()))
+                            .setPositiveButton("确定", listener)
+                            .show();
+                    buton_OK.setClickable(false);
+                    showResult(answer, playerAnswer);
+                } else {
+                    count++;
+                    showResult(answer, playerAnswer);
+                    showNumberArea1.setText("");
+                    showNumberArea2.setText("");
+                    showNumberArea3.setText("");
+                    showNumberArea4.setText("");
+                }
                 if (count == 6) {
                     DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
                         @Override
@@ -269,14 +298,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         Button buton_Refresh = (Button) findViewById(R.id.btn_refresh);
         buton_Refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clearShowResultArea();
-                answer.setNumbers(numberGenerator.generate());
+                numbers.clear();
                 count = 0;
                 buton_OK.setClickable(true);
+                showNumberArea1.setText("");
+                showNumberArea2.setText("");
+                showNumberArea3.setText("");
+                showNumberArea4.setText("");
+                answer.setNumbers(numberGenerator.generate());
             }
         });
 

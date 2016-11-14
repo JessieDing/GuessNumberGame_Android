@@ -17,27 +17,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:orientation="vertical"
-        tools:context="com.jessie.guessnumber.MainActivity">
+        tools:context="com.jessie.guessnumber.MainActivity"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
 
-            <Button
-                android:id="@+id/btn_refresh"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/refresh"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="35dp"
-                android:layout_marginTop="16dp"/>
+                <Chronometer
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_chronometer"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"/>
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/btn_refresh"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/refresh"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="30dp"/>
+
+            </RelativeLayout>
 
         <TableLayout
             android:layout_width="match_parent"
