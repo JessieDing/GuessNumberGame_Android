@@ -83,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (numbers.size() > 0) {
             showNumberArea1.setText("");
         }
-        numbers.remove(numbers.size() - 1);
+        if (numbers.size() > 0) {
+            numbers.remove(numbers.size() - 1);
+        }
     }
 
     private void showResult(Answer answer, Answer playerAnswer) {
