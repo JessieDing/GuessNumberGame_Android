@@ -15,22 +15,15 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.jessie.guessnumber.R.id.show_first_num;
+import static com.jessie.guessnumber.R.id.show_first_num; //???
 
 public class MainActivity extends AppCompatActivity {
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-//    private GoogleApiClient client;
     private int count; //默认值为0
     private List<String> numbers;
     private TextView showNumberArea1;
@@ -51,88 +44,6 @@ public class MainActivity extends AppCompatActivity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
-
-    private void showPlayerInputNumbers(int number) {  //在相应区域显示玩家输入的数字
-        if (numbers.size() < 4) {
-            numbers.add(String.valueOf(number));
-        }
-
-        if (numbers.size() > 0) {
-            showNumberArea1.setText(numbers.get(0));
-        }
-        if (numbers.size() > 1) {
-            showNumberArea2.setText(numbers.get(1));
-        }
-        if (numbers.size() > 2) {
-            showNumberArea3.setText(numbers.get(2));
-        }
-        if (numbers.size() > 3) {
-            showNumberArea4.setText(numbers.get(3));
-        }
-    }
-
-    private void delete() {
-
-        if (numbers.size() > 3) {
-            showNumberArea4.setText("");
-        } else if (numbers.size() > 2) {
-            showNumberArea3.setText("");
-        } else if (numbers.size() > 1) {
-            showNumberArea2.setText("");
-        } else if (numbers.size() > 0) {
-            showNumberArea1.setText("");
-        }
-        if (numbers.size() > 0) {
-            numbers.remove(numbers.size() - 1);
-        }
-    }
-
-    private void showResult(Answer answer, Answer playerAnswer) {
-        String numberArr = numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3);
-
-        switch (count) {
-            case 1:
-                String result1 = answer.compareTo(playerAnswer);
-                result_Area1.setText("(1)" + numberArr + "——>" + result1);
-                numbers.clear();
-                break;
-            case 2:
-                String result2 = answer.compareTo(playerAnswer);
-                result_Area2.setText("(2)" + numberArr + "——>" + result2);
-                numbers.clear();
-                break;
-            case 3:
-                String result3 = answer.compareTo(playerAnswer);
-                result_Area3.setText("(3)" + numberArr + "——>" + result3);
-                numbers.clear();
-                break;
-            case 4:
-                String result4 = answer.compareTo(playerAnswer);
-                result_Area4.setText("(4)" + numberArr + "——>" + result4);
-                numbers.clear();
-                break;
-            case 5:
-                String result5 = answer.compareTo(playerAnswer);
-                result_Area5.setText("(5)" + numberArr + "——>" + result5);
-                numbers.clear();
-                break;
-            case 6:
-                String result6 = answer.compareTo(playerAnswer);
-                result_Area6.setText("(6)" + numberArr + "——>" + result6);
-                numbers.clear();
-                break;
-        }
-    }
-
-    private void clearShowResultArea() {
-        result_Area1.setText("");
-        result_Area2.setText("");
-        result_Area3.setText("");
-        result_Area4.setText("");
-        result_Area5.setText("");
-        result_Area6.setText("");
-    }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {  //程序运行时首先进onCreate方法
@@ -259,41 +170,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (numbers.size() < 4) {
-                    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    };
-                    new AlertDialog.Builder(MainActivity.this)
-                            .setTitle("提示")
-                            .setMessage("请输入4个数字！")
-                            .setPositiveButton("确定", listener)
-                            .show();
+                    showAlertDialog("提示", "请输入4个数字！");
                 } else if (validator.isRepeated(playerAnswer)) {
-                    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    };
-                    new AlertDialog.Builder(MainActivity.this)
-                            .setTitle("提示")
-                            .setMessage("数字请勿重复！")
-                            .setPositiveButton("确定", listener)
-                            .show();
+                    showAlertDialog("提示", "数字请勿重复！");
                 } else if (answer.getNumbers().equals(playerAnswer.getNumbers())) {
-                    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    };
-                    new AlertDialog.Builder(MainActivity.this)
-                            .setTitle("恭喜你答对了！")
-                            .setMessage("正确答案是" + TextUtils.join(",", answer.getNumbers()))
-                            .setPositiveButton("确定", listener)
-                            .show();
+                    showAlertDialog("恭喜你答对了！", "正确答案是" + TextUtils.join(",", answer.getNumbers()));
                     buton_OK.setClickable(false);
                     chronometer.stop();
                 } else {
@@ -305,23 +186,12 @@ public class MainActivity extends AppCompatActivity {
                     showNumberArea4.setText("");
                 }
                 if (count == 6) {
-                    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    };
-                    new AlertDialog.Builder(MainActivity.this)
-                            .setTitle("很遗憾，六次机会已用完！")
-                            .setMessage("正确答案是" + TextUtils.join(",", answer.getNumbers()))
-                            .setPositiveButton("确定", listener)
-                            .show();
+                    showAlertDialog("很遗憾，六次机会已用完！", "正确答案是" + TextUtils.join(",", answer.getNumbers()));
                     buton_OK.setClickable(false);
                     chronometer.stop();
                 }
             }
         });
-
 
         Button buton_Refresh = (Button) findViewById(R.id.btn_refresh);
         buton_Refresh.setOnClickListener(new View.OnClickListener() {
@@ -340,11 +210,105 @@ public class MainActivity extends AppCompatActivity {
                 answer.setNumbers(numberGenerator.generate());
             }
         });
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
+    private void showPlayerInputNumbers(int number) {  //在相应区域显示玩家输入的数字
+        if (numbers.size() < 4) {
+            numbers.add(String.valueOf(number));
+        }
+
+        if (numbers.size() > 0) {
+            showNumberArea1.setText(numbers.get(0));
+        }
+        if (numbers.size() > 1) {
+            showNumberArea2.setText(numbers.get(1));
+        }
+        if (numbers.size() > 2) {
+            showNumberArea3.setText(numbers.get(2));
+        }
+        if (numbers.size() > 3) {
+            showNumberArea4.setText(numbers.get(3));
+        }
+    }
+
+    private void showResult(Answer answer, Answer playerAnswer) {
+        String numberArr = numbers.get(0) + numbers.get(1) + numbers.get(2) + numbers.get(3);
+
+        switch (count) {
+            case 1:
+                String result1 = answer.compareTo(playerAnswer);
+                result_Area1.setText("(1)" + numberArr + "——>" + result1);
+                numbers.clear();
+                break;
+            case 2:
+                String result2 = answer.compareTo(playerAnswer);
+                result_Area2.setText("(2)" + numberArr + "——>" + result2);
+                numbers.clear();
+                break;
+            case 3:
+                String result3 = answer.compareTo(playerAnswer);
+                result_Area3.setText("(3)" + numberArr + "——>" + result3);
+                numbers.clear();
+                break;
+            case 4:
+                String result4 = answer.compareTo(playerAnswer);
+                result_Area4.setText("(4)" + numberArr + "——>" + result4);
+                numbers.clear();
+                break;
+            case 5:
+                String result5 = answer.compareTo(playerAnswer);
+                result_Area5.setText("(5)" + numberArr + "——>" + result5);
+                numbers.clear();
+                break;
+            case 6:
+                String result6 = answer.compareTo(playerAnswer);
+                result_Area6.setText("(6)" + numberArr + "——>" + result6);
+                numbers.clear();
+                break;
+        }
+    }
+
+    private void showAlertDialog(String title, String message) {
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("确定", listener)
+                .show();
+    }
+
+    private void delete() {
+        if (numbers.size() > 3) {
+            showNumberArea4.setText("");
+        } else if (numbers.size() > 2) {
+            showNumberArea3.setText("");
+        } else if (numbers.size() > 1) {
+            showNumberArea2.setText("");
+        } else if (numbers.size() > 0) {
+            showNumberArea1.setText("");
+        }
+        if (numbers.size() > 0) {
+            numbers.remove(numbers.size() - 1);
+        }
+    }
+
+    private void clearShowResultArea() {
+        result_Area1.setText("");
+        result_Area2.setText("");
+        result_Area3.setText("");
+        result_Area4.setText("");
+        result_Area5.setText("");
+        result_Area6.setText("");
+    }
+
+    // ATTENTION: This was auto-generated to implement the App Indexing API.
+    // See https://g.co/AppIndexing/AndroidStudio for more information.
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -382,36 +346,6 @@ public class MainActivity extends AppCompatActivity {
                 .setObject(object)
                 .setActionStatus(Action.STATUS_TYPE_COMPLETED)
                 .build();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();// ATTENTION: This was auto-generated to implement the App Indexing API.
-// See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        client.connect();
-//        AppIndex.AppIndexApi.start(client, getIndexApiAction());
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.start(client, getIndexApiAction0());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();// ATTENTION: This was auto-generated to implement the App Indexing API.
-// See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction0());
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-//        client.disconnect();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.disconnect();
     }
 
     /**
