@@ -9,6 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFFAFA"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.jessie.guessnumber.MainActivity"
     tools:showIn="@layout/activity_main">
@@ -17,159 +18,267 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:orientation="vertical"
-        tools:context="com.jessie.guessnumber.MainActivity">
+        tools:context="com.jessie.guessnumber.MainActivity"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="#FFFAFA">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/title_area"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="猜 数 字"
-                android:textColor="#2F4F4F"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                <Chronometer
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_chronometer"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"/>
 
-            <TextView
-                android:id="@+id/information_area"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="请依序选择4个不同数字，点击按钮得到“xAxB”的提示，A前面的数字代表位置和数字都对的个数，B前面的数字代表数字对但是位置不对的个数。你一共有六次机会哦！" />
-        </LinearLayout>
+                <Button
+                    android:id="@+id/btn_refresh"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/refresh"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="30dp"/>
+
+            </RelativeLayout>
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2">
+            android:layout_gravity="center"
+            android:layout_weight="4"
+            android:background="@drawable/backgrnd_grid"
+            android:stretchColumns="*">     <!-- 均匀布局每列-->
 
-            <TableRow android:layout_weight="1">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/btn_7"
-                    android:layout_width="0px"
-                    android:layout_weight="1"
-                    android:onClick="onClick"
-                    android:text="7" />
+                <TextView
+                    android:id="@+id/showResult_1"
+                    android:layout_marginTop="40dip"
+                    android:gravity="center"
+                    android:text="第一次" />
 
-                <Button
-                    android:id="@+id/btn_8"
-                    android:layout_width="0px"
-                    android:layout_weight="1"
-                    android:onClick="onClick"
-                    android:text="8" />
+                <TextView
+                    android:id="@+id/showResult_2"
+                    android:layout_marginTop="40dip"
+                    android:gravity="center"
+                    android:text="第二次" />
 
-                <Button
-                    android:id="@+id/btn_9"
-                    android:layout_width="0px"
-                    android:layout_weight="1"
-                    android:onClick="onClick"
-                    android:text="9" />
             </TableRow>
 
             <TableRow android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/btn_4"
-                    android:layout_width="0px"
-                    android:layout_weight="1"
-                    android:onClick="onClick"
-                    android:text="4" />
+                <TextView
+                    android:id="@+id/showResult_3"
+                    android:gravity="center"
+                    android:text="第三次" />
 
-                <Button
-                    android:id="@+id/btn_5"
-                    android:layout_width="0px"
-                    android:layout_weight="1"
-                    android:onClick="onClick"
-                    android:text="5" />
-
-                <Button
-                    android:id="@+id/btn_6"
-                    android:layout_width="0px"
-                    android:layout_weight="1"
-                    android:onClick="onClick"
-                    android:text="6" />
-            </TableRow>
-
-            <TableRow android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/btn_1"
-                    android:layout_width="0px"
-                    android:layout_weight="1"
-                    android:onClick="onClick"
-                    android:text="1" />
-
-                <Button
-                    android:id="@+id/btn_2"
-                    android:layout_width="0px"
-                    android:layout_weight="1"
-                    android:onClick="onClick"
-                    android:text="2" />
-
-                <Button
-                    android:id="@+id/btn_3"
-                    android:layout_width="0px"
-                    android:layout_weight="1"
-                    android:onClick="onClick"
-                    android:text="3" />
+                <TextView
+                    android:id="@+id/showResult_4"
+                    android:gravity="center"
+                    android:text="第四次" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/btn_0"
-                    android:layout_width="0px"
-                    android:layout_weight="1"
-                    android:onClick="onClick"
-                    android:text="0" />
 
                 <TextView
-                    android:id="@+id/showNumber_area"
-                    android:layout_width="0px"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="center" />
-            </TableRow>
+                    android:id="@+id/showResult_5"
+                    android:gravity="center"
+                    android:text="第五次" />
 
+                <TextView
+                    android:id="@+id/showResult_6"
+                    android:gravity="center"
+                    android:text="第六次" />
+
+            </TableRow>
         </TableLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/button_showResult"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="checkResult"
-                android:text="点击查看提示"
-                android:textColor="#2F4F4F"
-                android:textSize="18sp" />
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/showResult_area"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2" />
+                android:id="@+id/show_first_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/layer_list"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/show_second_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/layer_list"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/show_third_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/layer_list"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/show_fourth_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/layer_list"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="4dp"/>
+
         </LinearLayout>
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:columnCount="4"
+            android:orientation="horizontal"
+            android:rowCount="4">
+
+            <Button
+                android:id="@+id/btn_1"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_gravity="end"
+                android:layout_marginBottom="6dip"
+                android:background="@drawable/number_btn_view"
+                android:text="1" />
+            　　
+
+            <Button
+                android:id="@+id/btn_2"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:background="@drawable/number_btn_view"
+                android:text="2" />
+            　　　
+
+            <Button
+                android:id="@+id/btn_3"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/number_btn_view"
+                android:text="3" />
+
+            <Button
+                android:id="@+id/btn_4"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="0dip"
+                android:background="@drawable/number_btn_view"
+                android:text="4" />
+            　　
+
+            <Button
+                android:id="@+id/btn_5"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_gravity="end"
+                android:layout_marginBottom="6dip"
+                android:background="@drawable/number_btn_view"
+                android:text="5" />
+            　　　
+
+            <Button
+                android:id="@+id/btn_6"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:background="@drawable/number_btn_view"
+                android:text="6" />
+
+            <Button
+                android:id="@+id/btn_7"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="0dip"
+                android:layout_marginRight="4dip"
+                android:background="@drawable/number_btn_view"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/btn_8"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="0dip"
+                android:layout_marginRight="4dip"
+                android:background="@drawable/number_btn_view"
+                android:text="8" />
+            　　　
+
+            <Button
+                android:id="@+id/btn_9"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="0dip"
+                android:background="@drawable/number_btn_view"
+                android:text="9"
+                android:layout_marginBottom="4dp"/>
+
+            <Button
+                android:id="@+id/btn_0"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:background="@drawable/number_btn_view"
+                android:text="0" />
+
+            <Button
+                android:id="@+id/btn_del"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="0dip"
+                android:layout_marginRight="4dip"
+                android:background="@drawable/number_btn_view"
+                android:text="DEL" />
+
+            <Button
+                android:id="@+id/btn_OK"
+
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="0dip"
+                android:layout_marginRight="4dip"
+                android:background="@drawable/number_btn_view"
+                android:text="OK" />
+
+
+        </GridLayout>
     </LinearLayout>
 </RelativeLayout>
